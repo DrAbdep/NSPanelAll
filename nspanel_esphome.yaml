@@ -410,24 +410,7 @@ binary_sensor:
       number: 14
       inverted: true
     on_click:
-      then:
-        - if:
-            condition:
-              and:
-                  - switch.is_on: relay1_fallback
-                  - not:
-                      api.connected:
-            then:
-              - switch.toggle: relay_1
-              - if: 
-                  condition:
-                    switch.is_on: relay_1
-                  then:
-                    - lambda: id(disp1).send_command_printf("home.left_bt_pic.pic=78");
-                    - lambda: id(disp1).send_command_printf("home.icon_top_01","\U0000E3A5");
-                  else:
-                    - lambda: id(disp1).send_command_printf("home.left_bt_pic.pic=77");
-                    - lambda: id(disp1).send_command_printf("home.icon_top_01","\U0000FFFF");
+      - lambda: 'id(disp1)->upload_tft();'
 
 
   ##### RIGHT BUTTON BELOW DISPLAY TO TOGGLE RELAY #####
