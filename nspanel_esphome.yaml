@@ -134,7 +134,18 @@ api:
   # password: ${api_password}
   services:
 
-    ##### SERVICE TO UPDATE THE HMI FILE #####
+##### SERVICE TO ADD CUSTOMCMD SERVICE #####
+    - service: customcmd
+      variables:
+        cmd_str: string
+      then:
+      - logger.log:
+          format: "Force cmd: %s"
+          args: [ cmd_str.c_str() ]
+      - lambda: id(disp1).write_str(cmd_str.c_str());
+      - lambda: id(disp1).write_array({0xFF, 0xFF, 0xFF});
+
+##### SERVICE TO UPDATE THE HMI FILE #####
     - service: upload_tft
       then:
         - lambda: 'id(disp1)->upload_tft();'
