@@ -797,6 +797,13 @@ text_sensor:
 
 ##### START - SWITCH CONFIGURATION #####
 switch:
+  - platform: gpio
+    id: panel_power
+    entity_category: config
+    pin:
+      number: 4
+      inverted: true
+    restore_mode: ALWAYS_ON
 
   # ##### Restart switch ######
   # - platform: restart
